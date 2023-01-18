@@ -22,9 +22,9 @@ public class VerificationPage {
         errorNotification.shouldBe(visible);
     }
 
-    public ApplicationFormPage validVerify(String verificationCode) {
+    public DebitCardPage validVerify(String verificationCode) {
         verify(verificationCode);
-        return page(ApplicationFormPage.class);
+        return page(DebitCardPage.class);
     }
 
     public void verify(String verificationCode) {

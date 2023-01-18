@@ -21,19 +21,19 @@ public class LoginPage {
         errorNotification.shouldBe(visible);
     }
 
-    public VerificationPage invalidLogin (DataHelper.AuthInfoForSystemBlock info) {
-        loginField.setValue(info.getLogin());
-        passwordField.setValue(info.getPassword());
-        loginButton.click();
-        loginButton.click();
-        loginButton.click();
-        return page(VerificationPage.class);
-    }
-
-    public VerificationPage validLogin(DataHelper.AuthInfo info) {
-        loginField.setValue(info.getLogin());
-        passwordField.setValue(info.getPassword());
-        loginButton.click();
-        return page(VerificationPage.class);
-    }
+//    public VerificationPage invalidLogin (DataHelper.AuthInfoForSystemBlock info) {
+//        loginField.setValue(info.getLogin());
+//        passwordField.setValue(info.getPassword());
+//        loginButton.click();
+//        loginButton.click();
+//        loginButton.click();
+//        return page(VerificationPage.class);
+//    }
+//
+//    public VerificationPage validLogin(DataHelper.AuthInfo info) {
+//        loginField.setValue(info.getLogin());
+//        passwordField.setValue(info.getPassword());
+//        loginButton.click();
+//        return page(VerificationPage.class);
+//    }
 }
