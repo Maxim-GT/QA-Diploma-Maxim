@@ -22,8 +22,11 @@ public class CreditCardPage {
     private SelenideElement cvcField;
     @FindBy(css="form div:nth-child(4) .button__content")
     private SelenideElement continueButton;
-    @FindBy(css="div[class='notification notification_visible notification_status_ok notification_has-closer notification_stick-to_right notification_theme_alfa-on-white']")
+    @FindBy(css=".notification_status_ok .notification__content")
     private SelenideElement successfulMessage;
+
+    @FindBy(css=".notification_status_error .notification__content")
+    private SelenideElement errorMessage;
 
     public CreditCardPage validCardData (DataHelper.CardInfo info){
         purchaseOnCreditButton.click();

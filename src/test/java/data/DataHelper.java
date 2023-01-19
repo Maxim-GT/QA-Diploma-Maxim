@@ -104,4 +104,15 @@ public class DataHelper {
         String cvc;
         String name;
     }
+
+    @Value
+    public static class Status {
+        String status;
+    }
+
+    @Value
+    public static class PaymentID {
+        String paymentID;
+    }
+
 }

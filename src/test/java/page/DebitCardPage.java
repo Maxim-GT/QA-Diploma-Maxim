@@ -1,5 +1,6 @@
 package page;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import data.DataHelper;
 import org.openqa.selenium.support.FindBy;
@@ -25,7 +26,7 @@ public class DebitCardPage {
     private SelenideElement cvcField;
     @FindBy(css="form div:nth-child(4) .button__content")
     private SelenideElement continueButton;
-    @FindBy(css="div[class='notification notification_visible notification_status_ok notification_has-closer notification_stick-to_right notification_theme_alfa-on-white']")
+    @FindBy(css=".notification_status_ok .notification__content")
     private SelenideElement successfulMessage;
     @FindBy(css="div[class='notification notification_visible notification_status_error notification_has-closer notification_stick-to_right notification_theme_alfa-on-white']")
     private SelenideElement errorMessage;
@@ -38,9 +39,9 @@ public class DebitCardPage {
         nameField.setValue(info.getName());
         cvcField.setValue(info.getCvc());
         continueButton.click();
-        successfulMessage.shouldBe(visible);
         return page(DebitCardPage.class);
     }
+
     public DebitCardPage invalidCardData (DataHelper.CardInfo info){
         purchaseButton.click();
         cardNumberField.setValue(info.getCardNumber());

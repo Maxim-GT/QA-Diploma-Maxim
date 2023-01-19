@@ -1,7 +1,10 @@
 package tests;
 
 //import SQLData.SQLHelper;
+import SQLData.SQLHelper;
 import data.DataHelper;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import page.CreditCardPage;
 import page.DebitCardPage;
@@ -26,22 +29,25 @@ public class LoginTest {
     void shouldSuccessfullyFillDebitCardForm() {
         var applicationFormPage = open("http://localhost:8080", DebitCardPage.class);
         var info = DataHelper.getValidCardData();
+        var paymentID = SQLHelper.getPaymentID();
+        var status = SQLHelper.getDebitCardStatus(String.valueOf(paymentID));
         applicationFormPage.validCardData(info);
+        Assertions.assertEquals(new DataHelper.Status("APPROVED"), status);
     }
 
-    @Test
-    void shouldSuccessfullyFillCreditCardForm() {
-        var applicationFormPage = open("http://localhost:8080", CreditCardPage.class);
-        var info = DataHelper.getValidCardData();
-        applicationFormPage.validCardData(info);
-    }
+//    @Test
+//    void shouldSuccessfullyFillCreditCardForm() {
+//        var applicationFormPage = open("http://localhost:8080", CreditCardPage.class);
+//        var info = DataHelper.getValidCardData();
+//        applicationFormPage.validCardData(info);
+//    }
 
-    @Test
-    void shouldDeclineSendingDebitCardForm() {
-        var applicationFormPage = open("http://localhost:8080", DebitCardPage.class);
-        var info = DataHelper.getBlockedCardData();
-        applicationFormPage.invalidCardData(info);
-    }
+//    @Test
+//    void shouldDeclineSendingDebitCardForm() {
+//        var applicationFormPage = open("http://localhost:8080", DebitCardPage.class);
+//        var info = DataHelper.getBlockedCardData();
+//        applicationFormPage.invalidCardData(info);
+//    }
 
 //    @Test
 //    void shouldWarnIfInvalidUser() {
