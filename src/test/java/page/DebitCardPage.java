@@ -26,12 +26,14 @@ public class DebitCardPage {
     private SelenideElement cvcField;
     @FindBy(css="form div:nth-child(4) .button__content")
     private SelenideElement continueButton;
-    @FindBy(css=".notification_status_ok .notification__content")
+    @FindBy(css=" .notification_status_ok .notification__content")
     private SelenideElement successfulMessage;
-    @FindBy(css="div[class='notification notification_visible notification_status_error notification_has-closer notification_stick-to_right notification_theme_alfa-on-white']")
+    @FindBy(css=" .notification_status_error .notification__content")
     private SelenideElement errorMessage;
+    @FindBy(css="[class='input__sub']")
+    private SelenideElement warnMessage;
 
-    public DebitCardPage validCardData (DataHelper.CardInfo info){
+    public DebitCardPage CardData (DataHelper.CardInfo info){
         purchaseButton.click();
         cardNumberField.setValue(info.getCardNumber());
         monthNumberField.setValue(info.getMonth());
@@ -42,15 +44,21 @@ public class DebitCardPage {
         return page(DebitCardPage.class);
     }
 
-    public DebitCardPage invalidCardData (DataHelper.CardInfo info){
+    public void checkIfCardIsSuccessful(){
+        successfulMessage.waitUntil(visible, 15000);
+    }
+
+    public void checkIfCardIsInvalid(){
+        errorMessage.waitUntil(visible, 15000);
+    }
+
+    public void warnIfDataIsInvalid(){
+        warnMessage.shouldBe(visible);
+    }
+
+    public DebitCardPage checkIfFieldsAreEmpty(){
         purchaseButton.click();
-        cardNumberField.setValue(info.getCardNumber());
-        monthNumberField.setValue(info.getMonth());
-        yearNumberField.setValue(info.getYear());
-        nameField.setValue(info.getName());
-        cvcField.setValue(info.getCvc());
         continueButton.click();
-        errorMessage.shouldBe(visible);
         return page(DebitCardPage.class);
     }
 }

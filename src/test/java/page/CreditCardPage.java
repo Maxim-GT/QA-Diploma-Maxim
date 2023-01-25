@@ -22,13 +22,15 @@ public class CreditCardPage {
     private SelenideElement cvcField;
     @FindBy(css="form div:nth-child(4) .button__content")
     private SelenideElement continueButton;
-    @FindBy(css=".notification_status_ok .notification__content")
+    @FindBy(css=" .notification_status_ok .notification__content")
     private SelenideElement successfulMessage;
 
-    @FindBy(css=".notification_status_error .notification__content")
+    @FindBy(css=" .notification_status_error .notification__content")
     private SelenideElement errorMessage;
 
-    public CreditCardPage validCardData (DataHelper.CardInfo info){
+    @FindBy(css="[class='input__sub']")
+    private SelenideElement warnMessage;
+    public CreditCardPage CardData (DataHelper.CardInfo info){
         purchaseOnCreditButton.click();
         cardNumberField.setValue(info.getCardNumber());
         monthNumberField.setValue(info.getMonth());
@@ -36,7 +38,13 @@ public class CreditCardPage {
         nameField.setValue(info.getName());
         cvcField.setValue(info.getCvc());
         continueButton.click();
-        successfulMessage.shouldBe(visible);
         return page(CreditCardPage.class);
+    }
+    public void checkIfCardIsValid(){
+        successfulMessage.waitUntil(visible, 15000);
+    }
+
+    public void checkIfCardIsInvalid(){
+        errorMessage.waitUntil(visible, 15000);
     }
 }

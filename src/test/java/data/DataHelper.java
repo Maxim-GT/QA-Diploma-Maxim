@@ -1,11 +1,7 @@
 package data;
 
 import com.github.javafaker.Faker;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.Value;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -74,25 +70,32 @@ public class DataHelper {
         return new CardInfo(cardNumber, month, invalidYear, cvc, name);
     }
 
+    public static CardInfo getCardDataWithNonexistentCVC() {
+        return new CardInfo(cardNumber, month, year, "000", name);
+    }
+
     public static CardInfo getCardDataWithOneFigureInCVC() {
-        return new CardInfo(cardNumber, month, invalidYear, "1", name);
+        return new CardInfo(cardNumber, month, year, "1", name);
     }
 
     public static CardInfo getCardDataWithTwoFiguresInCVC() {
-        return new CardInfo(cardNumber, month, invalidYear, "12", name);
+        return new CardInfo(cardNumber, month, year, "12", name);
     }
 
     public static CardInfo getCardDataWithFourFiguresInCVC() {
-        return new CardInfo(cardNumber, month, invalidYear, "1234", name);
+        return new CardInfo(cardNumber, month, year, "1234", name);
     }
 
+    public static CardInfo getCardDataWithoutName() {
+        return new CardInfo(cardNumber, month, year, cvc,"");
+    }
     public static CardInfo getCardDataWithRussianName() {
         Faker faker = new Faker(new Locale("ru"));
-        return new CardInfo(cardNumber, month, invalidYear, cvc, faker.name().fullName());
+        return new CardInfo(cardNumber, month, year, cvc, faker.name().fullName());
     }
 
     public static CardInfo getCardDataWithLowerCaseName() {
-        return new CardInfo(cardNumber, month, invalidYear, cvc, faker.name().fullName().toLowerCase());
+        return new CardInfo(cardNumber, month, year, cvc, faker.name().fullName().toLowerCase());
     }
 
 
@@ -113,6 +116,11 @@ public class DataHelper {
     @Value
     public static class PaymentID {
         String paymentID;
+    }
+
+    @Value
+    public static class CreditID {
+        String creditID;
     }
 
 }
