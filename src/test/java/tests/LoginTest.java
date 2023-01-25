@@ -178,23 +178,5 @@ public class LoginTest {
         applicationFormPage.CardData(info);
         applicationFormPage.warnIfDataIsInvalid();
     }
-
-
-
-//    @Test
-//    void shouldWarnIfInvalidUser() {
-//        var loginPage = open("http://localhost:9999", LoginPage.class);
-//        var authInfo = DataHelper.generateRandomUser();
-//        loginPage.validLogin(authInfo);
-//        loginPage.errorNotificationVisibility();
-//    }
-//
-//    @Test
-//    void shouldBlockSystem() {
-//        var loginPage = open("http://localhost:9999", LoginPage.class);
-//        var authInfoForSystemBlock = DataHelper.getInfoForSystemBlock();
-//        var status = SQLHelper.getUserStatus();
-//        loginPage.invalidLogin(authInfoForSystemBlock);
-//        Assertions.assertEquals(new DataHelper.Status("blocked"), status);
-//    }
+    
 }
