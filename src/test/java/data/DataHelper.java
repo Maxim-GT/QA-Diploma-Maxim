@@ -11,18 +11,18 @@ public class DataHelper {
     private static String cardNumber = "4444 4444 4444 4441";
     private static String blockedCardNumber = "4444 4444 4444 4442";
 
-    private static String month = generateDate("MM", 0, 0);
-    private static String year = generateDate("yy", 3, 0);
+    private static String month = generateDate("MM", 0);
+    private static String year = generateDate("yy", 3);
 
-    private static String invalidYear = generateDate("yy", 0, 1);
+    private static String invalidYear = generateDate("yy", -1);
     private static String cvc = faker.numerify("###");
     private static String name = faker.name().name().toUpperCase();
 
     private DataHelper() {
     }
 
-    static String generateDate(String pattern, int years, int minusYears) {
-        return LocalDate.now().plusYears(years).minusYears(minusYears).format(DateTimeFormatter.ofPattern(pattern));
+    static String generateDate(String pattern, int years) {
+        return LocalDate.now().plusYears(years).format(DateTimeFormatter.ofPattern(pattern));
     }
 
 
@@ -91,7 +91,7 @@ public class DataHelper {
     }
     public static CardInfo getCardDataWithRussianName() {
         Faker faker = new Faker(new Locale("ru"));
-        return new CardInfo(cardNumber, month, year, cvc, faker.name().fullName());
+        return new CardInfo(cardNumber, month, year, cvc, faker.name().fullName().toUpperCase());
     }
 
     public static CardInfo getCardDataWithLowerCaseName() {

@@ -33,7 +33,7 @@ public class DebitCardPage {
     @FindBy(css="[class='input__sub']")
     private SelenideElement warnMessage;
 
-    public DebitCardPage CardData (DataHelper.CardInfo info){
+    public DebitCardPage cardData (DataHelper.CardInfo info){
         purchaseButton.click();
         cardNumberField.setValue(info.getCardNumber());
         monthNumberField.setValue(info.getMonth());

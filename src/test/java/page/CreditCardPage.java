@@ -30,7 +30,7 @@ public class CreditCardPage {
 
     @FindBy(css="[class='input__sub']")
     private SelenideElement warnMessage;
-    public CreditCardPage CardData (DataHelper.CardInfo info){
+    public CreditCardPage cardData (DataHelper.CardInfo info){
         purchaseOnCreditButton.click();
         cardNumberField.setValue(info.getCardNumber());
         monthNumberField.setValue(info.getMonth());
@@ -46,5 +46,15 @@ public class CreditCardPage {
 
     public void checkIfCardIsInvalid(){
         errorMessage.waitUntil(visible, 15000);
+    }
+
+    public void warnIfDataIsInvalid(){
+        warnMessage.shouldBe(visible);
+    }
+
+    public CreditCardPage checkIfFieldsAreEmpty(){
+        purchaseOnCreditButton.click();
+        continueButton.click();
+        return page(CreditCardPage.class);
     }
 }

@@ -15,61 +15,53 @@ public class SQLHelper {
 
     @SneakyThrows
     private static Connection getConn() {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
+        var URL = System.getProperty("db.url");
+        var login = System.getProperty("login");
+        var password = System.getProperty("password");
+        var connection = DriverManager.getConnection(URL, login, password);
+        return connection;
     }
 
-     @SneakyThrows
+    @SneakyThrows
     public static DataHelper.PaymentID getPaymentID() {
         var codeSQL = "SELECT payment_id FROM order_entity order by created desc limit 1";
-        try (var conn = getConn()) {
-            var paymentID = runner.query(conn, codeSQL, new ScalarHandler<String>());
-            return new DataHelper.PaymentID(paymentID);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return null;
+        var conn = getConn();
+        var paymentID = runner.query(conn, codeSQL, new ScalarHandler<String>());
+        return new DataHelper.PaymentID(paymentID);
     }
 
     @SneakyThrows
     public static DataHelper.Status getDebitCardStatus(String paymentID) {
         String status = null;
-        String codeSQL = "SELECT status FROM payment_entity where transaction_id = ?;";
-        try (var conn = getConn()) {
-            PreparedStatement selectPreparedStatement = conn.prepareStatement(codeSQL);
-            selectPreparedStatement.setString( 1, paymentID);
-            try (var rs = selectPreparedStatement.executeQuery()) {
-                if (rs.next()) {
-                    status = rs.getString("status");
-                }
-            }
+        var codeSQL = "SELECT status FROM payment_entity where transaction_id = ?;";
+        var conn = getConn();
+        var selectPreparedStatement = conn.prepareStatement(codeSQL);
+        selectPreparedStatement.setString(1, paymentID);
+        var rs = selectPreparedStatement.executeQuery();
+        if (rs.next()) {
+            status = rs.getString("status");
         }
         return new DataHelper.Status(status);
     }
 
+    @SneakyThrows
     public static DataHelper.CreditID getCreditID() {
         var codeSQL = "SELECT payment_id FROM order_entity order by created desc limit 1";
-        try (var conn = getConn()) {
-            var result = runner.query(conn, codeSQL, new ScalarHandler<String>());
-            return new DataHelper.CreditID(result);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return null;
+        var conn = getConn();
+        var creditID = runner.query(conn, codeSQL, new ScalarHandler<String>());
+        return new DataHelper.CreditID(creditID);
     }
 
-    public static DataHelper.Status getCreditCardStatus (String creditID) {
+    @SneakyThrows
+    public static DataHelper.Status getCreditCardStatus(String creditID) {
         String status = null;
-        String codeSQL = "SELECT status FROM credit_request_entity where bank_id = ?;";
-        try (var conn = getConn()) {
-            PreparedStatement selectPreparedStatement = conn.prepareStatement(codeSQL);
-            selectPreparedStatement.setString( 1, creditID);
-            try (var rs = selectPreparedStatement.executeQuery()) {
-                if (rs.next()) {
-                    status = rs.getString("status");
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        var codeSQL = "SELECT status FROM credit_request_entity where bank_id = ?;";
+        var conn = getConn();
+        var selectPreparedStatement = conn.prepareStatement(codeSQL);
+        selectPreparedStatement.setString(1, creditID);
+        var rs = selectPreparedStatement.executeQuery();
+        if (rs.next()) {
+            status = rs.getString("status");
         }
         return new DataHelper.Status(status);
     }
