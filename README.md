@@ -12,12 +12,12 @@
 
 ## Шаги по запуску тестов
 1. Склонировать данный проект
-1. Открыть проект в IntelliJ IDEA
-1. Запустить контейнеры в терминале командой
+2. Открыть проект в IntelliJ IDEA
+3. Запустить контейнеры в терминале командой
 `
 docker-compose up -d --force-recreate --build 
 `
-1. Для запуска приложения с параметрами: 
+4. Для запуска приложения с параметрами: 
 * под MySQL ввести в терминале команду
 `
 java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" "-Dspring.datasource.username=app" "-Dspring.datasource.password=pass" -jar artifacts/aqa-shop.jar
@@ -27,7 +27,7 @@ java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" "-Dspring.datasou
 `
 java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/postgres" "-Dspring.datasource.username=app" "-Dspring.datasource.password=pass" -jar artifacts/aqa-shop.jar
 `
-1. Для запуска тестов:
+5. Для запуска тестов:
 * при работе с MySQL ввести команду
 `
 gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app
