@@ -27,12 +27,12 @@ java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" "-Dspring.datasou
 java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/postgres" "-Dspring.datasource.username=app" "-Dspring.datasource.password=pass" -jar artifacts/aqa-shop.jar
 `
 4. Для запуска тестов:
-* на MySQL ввести команду
+* при работе с MySQL ввести команду
 `
 gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app
 `
     
-* на PostgreSQL ввести команду
+* при работе с PostgreSQL ввести команду
 `
 gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/postgres
 `
