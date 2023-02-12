@@ -5,9 +5,9 @@
 ## Отчетная документация
 * [План автоматизации](https://github.com/Maxim-GT/QA-Diploma-Maxim/blob/379129ba8c0d4234608d5fc09c896a6b545b6599/Plan.md)
 
-* Репорты
+* [Репорт](https://github.com/Maxim-GT/QA-Diploma-Maxim/blob/0d021daab3e04d97ee2fcea0334ea013cbc08fab/Report.md)
 
-* Итоги
+* [Итоги](https://github.com/Maxim-GT/QA-Diploma-Maxim/blob/0d021daab3e04d97ee2fcea0334ea013cbc08fab/Summary.md)
 
 
 ## Шаги по запуску тестов
